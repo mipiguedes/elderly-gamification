@@ -1,6 +1,6 @@
 import { styled } from "@stitches/react";
 
-const Container = styled("div", {
+const ContainerMobileStyle = styled("div", {
   backgroundColor: "#D8EFFF",
   width: "100%",
   height: "100%",
@@ -9,5 +9,5 @@ const Container = styled("div", {
 });
 
 export const ContainerMobile = ({ children }: any) => {
-  return <Container>{children}</Container>;
+  return <ContainerMobileStyle>{children}</ContainerMobileStyle>;
 };
