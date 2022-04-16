@@ -6,6 +6,7 @@ const ContainerMobileStyle = styled("div", {
   height: "100%",
   maxWidth: "375px",
   maxHeight: "736px",
+  position: "relative"
 });
 
 export const ContainerMobile = ({ children }: any) => {
