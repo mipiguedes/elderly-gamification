@@ -6,7 +6,7 @@ type ProgressBarProps = {
 };
 
 export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
-  const completedSteps = (step * 100) / totalSteps;
+  const completedSteps = ((step * 100) / totalSteps) <= 100 ? ((step * 100) / totalSteps) : 100;
 
   const ContainerStyles = styled("div", {
     height: 12,

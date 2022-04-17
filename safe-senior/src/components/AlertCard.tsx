@@ -1,11 +1,10 @@
 import { styled } from "@stitches/react";
 import parse from "html-react-parser";
 
-type ContentCardProps = {
-  title: string;
-  content: string;
-  imageUrl: string;
+type AlertCardProps = {
+  image: string;
   imageAlt: string;
+  text: string;
 };
 
 const ContentCardStyle = styled("div", {
@@ -16,21 +15,15 @@ const ContentCardStyle = styled("div", {
   height: "fit-content",
   overflowY: "auto",
   maxHeight: "55vh",
-});
-
-const ContentHeader = styled("div", {
   display: "flex",
-  alignItems: "center",
-});
-
-const ContentBody = styled("div", {
-  fontSize: "1rem",
-  color: "#13274A",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center"
 });
 
 const CartoonImage = styled("img", {
-  maxWidth: "70px",
-  maxHeight: "70px",
+  maxWidth: "100px",
+  maxHeight: "100px",
   border: "3px solid #939393",
   borderRadius: "50%",
   boxSizing: "border-box",
@@ -40,26 +33,19 @@ const CartoonImage = styled("img", {
 });
 
 const Title = styled("h2", {
-  fontSize: "0.9rem",
+  fontSize: "1rem",
   fontWeight: 500,
   color: "#13274A",
   margin: 0,
   lineHeight: 1.3,
+  textAlign: "center"
 });
 
-export function ContentCard({
-  title,
-  content,
-  imageUrl,
-  imageAlt,
-}: ContentCardProps) {
+export function AlertCard({ image, imageAlt, text }: AlertCardProps) {
   return (
     <ContentCardStyle>
-      <ContentHeader>
-        <CartoonImage src={`${imageUrl}`} alt={`${imageAlt}`}></CartoonImage>
-        <Title>{parse(title)}</Title>
-      </ContentHeader>
-      <ContentBody>{parse(content)}</ContentBody>
+      <CartoonImage src={image} alt={imageAlt} />
+      <Title>{parse(text)}</Title>
     </ContentCardStyle>
   );
 }

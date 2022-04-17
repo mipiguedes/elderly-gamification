@@ -1,9 +1,9 @@
 import { useState } from "react";
-import parse from "html-react-parser";
 import { styled } from "@stitches/react";
 import { ContainerMobile } from "./ContainerMobile";
 import { HeaderMobile } from "./HeaderMobile";
 import { ContentCard } from "./ContentCard";
+import { AlertCard } from "./AlertCard";
 import passwordContent from "../passwordContent.json";
 import arrowRight from "../img/arrow-right.png";
 import arrowLeft from "../img/arrow-left.png";
@@ -43,8 +43,20 @@ const Image = styled("img", {
 export function Home() {
   const [currentContent, setCurrentContent] = useState(0);
 
+  const [contentSection, setContentSection] = useState(true);
+
+  const [questionSection, setQuestionSection] = useState(false);
+
+  const [intermediarySection, setIntermediarySection] = useState(false);
+
   const handleButtonNext = () => {
     const nextContent = currentContent + 1;
+
+    if (nextContent === passwordContent.length) {
+      setIntermediarySection(true);
+      setContentSection(false);
+    }
+
     setCurrentContent(nextContent);
   };
 
@@ -56,22 +68,39 @@ export function Home() {
   return (
     <Main>
       <ContainerMobile>
-        <HeaderMobile title={"senhas seguras na internet"} step={currentContent + 1} totalSteps={passwordContent.length}/>
-        <ContentCard
-          title={passwordContent[currentContent].title}
-          content={parse(passwordContent[currentContent].text)}
-          imageUrl={`../src/img/${passwordContent[currentContent].image}`}
-          imageAlt={passwordContent[currentContent].imageAlt}
+        <HeaderMobile
+          title={"senhas seguras na internet"}
+          step={currentContent + 1}
+          totalSteps={passwordContent.length}
         />
+        {contentSection && (
+          <>
+            <ContentCard
+              title={passwordContent[currentContent].title}
+              content={passwordContent[currentContent].text}
+              imageUrl={`../src/img/${passwordContent[currentContent].image}`}
+              imageAlt={passwordContent[currentContent].imageAlt}
+            />
 
-        <NavigationButtonStyle>
-          <Button onClick={handleButtonPrevious}>
-            <Image src={arrowLeft} alt="Seta Voltar" />
-          </Button>
-          <Button onClick={handleButtonNext}>
-            <Image src={arrowRight} alt="Seta Prosseguir" />
-          </Button>
-        </NavigationButtonStyle>
+            <NavigationButtonStyle>
+              <Button onClick={handleButtonPrevious}>
+                <Image src={arrowLeft} alt="Seta Voltar" />
+              </Button>
+              <Button onClick={handleButtonNext}>
+                <Image src={arrowRight} alt="Seta Prosseguir" />
+              </Button>
+            </NavigationButtonStyle>
+          </>
+        )}
+        {intermediarySection && (
+          <AlertCard
+            image={`../src/img/dedos-cruzados.png`}
+            imageAlt={"idosa com dedos cruzados sorrindo"}
+            text={
+              "<p><b>Você topa colocar esse conteúdo em prática?</b></p><p>Estou torcendo por você!</p>"
+            }
+          />
+        )}
       </ContainerMobile>
     </Main>
   );
