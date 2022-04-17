@@ -56,7 +56,7 @@ export function Home() {
   return (
     <Main>
       <ContainerMobile>
-        <HeaderMobile title={"senhas seguras na internet"} />
+        <HeaderMobile title={"senhas seguras na internet"} step={currentContent + 1} totalSteps={passwordContent.length}/>
         <ContentCard
           title={passwordContent[currentContent].title}
           content={parse(passwordContent[currentContent].text)}
