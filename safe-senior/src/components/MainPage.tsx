@@ -4,7 +4,9 @@ import { ContainerMobile } from "./ContainerMobile";
 import { HeaderMobile } from "./HeaderMobile";
 import { ContentCard } from "./ContentCard";
 import { AlertCard } from "./AlertCard";
+import { QuestionCard } from "./QuestionCard";
 import passwordContent from "../passwordContent.json";
+import passwordQuestionsData from "../passwordQuestions.json";
 import arrowRight from "../img/arrow-right.png";
 import arrowLeft from "../img/arrow-left.png";
 
@@ -40,8 +42,10 @@ const Image = styled("img", {
   objectFit: "contain",
 });
 
-export function Home() {
+export function MainPage() {
   const [currentContent, setCurrentContent] = useState(0);
+
+  const [currentQuestion, setcurrentQuestion] = useState(0);
 
   const [contentSection, setContentSection] = useState(true);
 
@@ -100,6 +104,9 @@ export function Home() {
               "<p><b>Você topa colocar esse conteúdo em prática?</b></p><p>Estou torcendo por você!</p>"
             }
           />
+        )}
+        { questionSection && (
+         <QuestionCard question={passwordQuestionsData[currentQuestion].question} anwserOptions={passwordQuestionsData[currentQuestion].answerOptions} image={`../src/img/${passwordQuestionsData[currentQuestion].image}`} imageAlt={passwordQuestionsData[currentQuestion].imageAlt}></QuestionCard>
         )}
       </ContainerMobile>
     </Main>
