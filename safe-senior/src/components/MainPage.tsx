@@ -47,9 +47,9 @@ export function MainPage() {
 
   const [currentQuestion, setcurrentQuestion] = useState(0);
 
-  const [contentSection, setContentSection] = useState(true);
+  const [contentSection, setContentSection] = useState(false);
 
-  const [questionSection, setQuestionSection] = useState(false);
+  const [questionSection, setQuestionSection] = useState(true);
 
   const [intermediarySection, setIntermediarySection] = useState(false);
 
