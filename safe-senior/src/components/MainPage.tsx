@@ -4,7 +4,7 @@ import { ContainerMobile } from "./ContainerMobile";
 import { HeaderMobile } from "./HeaderMobile";
 import { ContentCard } from "./ContentCard";
 import { AlertCard } from "./AlertCard";
-import { QuestionCard } from "./QuestionCard";
+import { PasswordQuestionsContainer } from "./PasswordQuestionsContainer";
 import passwordContent from "../passwordContent.json";
 import passwordQuestionsData from "../passwordQuestions.json";
 import arrowRight from "../img/arrow-right.png";
@@ -45,8 +45,6 @@ const Image = styled("img", {
 export function MainPage() {
   const [currentContent, setCurrentContent] = useState(0);
 
-  const [currentQuestion, setcurrentQuestion] = useState(0);
-
   const [contentSection, setContentSection] = useState(false);
 
   const [questionSection, setQuestionSection] = useState(true);
@@ -77,6 +75,7 @@ export function MainPage() {
           step={currentContent + 1}
           totalSteps={passwordContent.length}
         />
+
         {contentSection && (
           <>
             <ContentCard
@@ -96,6 +95,7 @@ export function MainPage() {
             </NavigationButtonStyle>
           </>
         )}
+
         {intermediarySection && (
           <AlertCard
             image={`../src/img/dedos-cruzados.png`}
@@ -105,9 +105,9 @@ export function MainPage() {
             }
           />
         )}
-        { questionSection && (
-         <QuestionCard question={passwordQuestionsData[currentQuestion].question} anwserOptions={passwordQuestionsData[currentQuestion].answerOptions} image={`../src/img/${passwordQuestionsData[currentQuestion].image}`} imageAlt={passwordQuestionsData[currentQuestion].imageAlt}></QuestionCard>
-        )}
+
+        {questionSection && <PasswordQuestionsContainer />}
+        
       </ContainerMobile>
     </Main>
   );

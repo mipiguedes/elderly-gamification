@@ -1,9 +1,9 @@
 import { styled } from "@stitches/react";
 import { useState } from "react";
+import { Button } from "./Button";
 
 type QuestionCardProps = {
   question: string;
-  anwserOptions: Array<any>;
   image: string;
   imageAlt: string;
 };
@@ -39,66 +39,22 @@ const Title = styled("h2", {
   lineHeight: 1.3,
 });
 
-const GroupOptionCard = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-});
-
-const Option = styled("button", {
-  fontSize: "1.125rem",
-  fontWeight: 500,
-  color: "#13274A",
-  lineHeight: 1.3,
-  margin: "0.5rem 1.5rem",
-  padding: "0.65rem",
-  backgroundColor: "#FFFFFF",
-  borderRadius: "10px",
-  height: "53px",
-  overflowY: "auto",
-  maxHeight: "200px",
-  cursor: "pointer",
-  transition: "all .0.4s",
-  "&:hover": {
-    backgroundColor: "#ECECEC",
-    border: "3px solid #13274A",
-  },
-  variants: {
-    type: {
-      active: {
-        backgroundColor: "#ECECEC",
-        border: "3px solid #13274A",
-      },
-    },
-  },
-});
 
 export function QuestionCard({
   question,
-  anwserOptions,
   image,
   imageAlt,
 }: QuestionCardProps) {
-  const [selectedOption, setSelectedOption] = useState(0);
 
-  const handleSelectedOption = (option): any => {
-    setSelectedOption(option);
-  };
+  
+
   return (
     <>
       <QuestionTextCard>
         <CartoonImage src={image} alt={imageAlt} />
         <Title>{question}</Title>
       </QuestionTextCard>
-      <GroupOptionCard>
-        {anwserOptions.map((anwser, index) => (
-          <Option
-            type={selectedOption === index ? "active" : ""}
-            onClick={() => handleSelectedOption(index)}
-          >
-            {anwser.answerText}
-          </Option>
-        ))}
-      </GroupOptionCard>
+     
     </>
   );
 }
