@@ -19,7 +19,7 @@ const Option = styled("button", {
   padding: "0.65rem",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
-  height: "53px",
+  minHeight: "53px",
   overflowY: "auto",
   maxHeight: "200px",
   cursor: "pointer",
@@ -61,12 +61,26 @@ export function PasswordQuestionsContainer() {
     setSelectedOption(option);
   };
 
-  const handleNextQuestion = () => {
+  const handleQuestion = () => {
     setCurrentSection("question");
+
+    const nextFeedback = currentFeedback + 1;
+
+    if (nextFeedback < passwordQuestionsData.length) {
+      setCurrentFeedback(nextFeedback);
+    }
+  };
+
+  const handleFeedback = () => {
+    isOptionCorrect();
+
+    setCurrentSection("feedback");
 
     const nextQuestion = currentQuestion + 1;
 
-    setCurrentQuestion(nextQuestion);
+    if (nextQuestion < passwordQuestionsData.length) {
+      setCurrentQuestion(nextQuestion);
+    }
   };
 
   const isOptionCorrect = () => {
@@ -79,12 +93,6 @@ export function PasswordQuestionsContainer() {
     } else {
       setQuestionResult(false);
     }
-
-    setCurrentSection("feedback");
-
-    const nextFeedback = currentFeedback + 1;
-
-    setCurrentFeedback(nextFeedback);
   };
 
   return (
@@ -118,7 +126,8 @@ export function PasswordQuestionsContainer() {
             questionResult === true
               ? passwordQuestionsData[currentFeedback].feedbacks
                   ?.imageFeedbackRight
-              : passwordQuestionsData[currentFeedback].feedbacks.imageFeedbackWrong
+              : passwordQuestionsData[currentFeedback].feedbacks
+                  .imageFeedbackWrong
           }`}
           imageAlt={passwordQuestionsData[currentQuestion].imageAlt}
           text={
@@ -130,13 +139,14 @@ export function PasswordQuestionsContainer() {
       )}
 
       <ButtonContainer>
-        {currentSection === "feedback" && (
-          <Button onClick={() => handleNextQuestion()} text={"Continuar"} />
-        )}
-
-        {currentSection === "question" && (
-          <Button onClick={() => isOptionCorrect()} text={"Proximo"} />
-        )}
+        <Button
+          onClick={
+            currentSection === "feedback"
+              ? () => handleQuestion()
+              : () => handleFeedback()
+          }
+          text={"Continuar"}
+        />
       </ButtonContainer>
     </>
   );
