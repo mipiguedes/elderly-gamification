@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { styled } from "@stitches/react";
 import { ContainerMobile } from "./ContainerMobile";
-import { HeaderMobile } from "./HeaderMobile";
-import { ContentCard } from "./ContentCard";
+import { HeadingOne } from "./HeadingOne";
+import { ProgressBar } from "./ProgressBar";
+import { ContentSection } from "./ContentSection";
 import { AlertCard } from "./AlertCard";
+import { ReturnButton } from "./ReturnButton";
 import { PasswordQuestionsContainer } from "./PasswordQuestionsContainer";
-import passwordContent from "../passwordContent.json";
 import passwordQuestionsData from "../passwordQuestions.json";
+import passwordContent from "../passwordContent.json";
 import arrowRight from "../img/arrow-right.png";
 import arrowLeft from "../img/arrow-left.png";
 
@@ -19,27 +21,22 @@ const Main = styled("div", {
   justifyContent: "center",
 });
 
-const NavigationButtonStyle = styled("div", {
-  width: "100%",
+const HeaderMobileStyle = styled("header", {
+  backgroundColor: "#13274A",
+  padding: "0.5rem 2rem",
+  height: "fit-content",
+  minHeight: "100px",
+  borderRadius: "0 0 40px 40px",
   display: "flex",
-  justifyContent: "space-around",
-  position: "absolute",
-  bottom: "40px",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
 });
 
-const Button = styled("button", {
-  backgroundColor: "#FFFFFF",
-  width: "105px",
-  height: "58px",
-  border: 0,
-  borderRadius: 10,
-  padding: "5px",
-});
-
-const Image = styled("img", {
-  width: "100%",
-  height: "100%",
-  objectFit: "contain",
+const Menus = styled("div", {
+  height: "fit-content",
+  display: "flex",
+  justifyContent: "space-between",
 });
 
 export function MainPage() {
@@ -50,6 +47,54 @@ export function MainPage() {
   const [questionSection, setQuestionSection] = useState(true);
 
   const [intermediarySection, setIntermediarySection] = useState(false);
+
+  //
+
+  const [currentFeedback, setCurrentFeedback] = useState(0);
+
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const [currentSection, setCurrentSection] = useState("question");
+
+  const [selectedOption, setSelectedOption] = useState(0);
+
+  const [questionResult, setQuestionResult] = useState(true);
+
+  const anwserOptions = passwordQuestionsData[currentQuestion].answerOptions;
+
+  const handleSelectedOption = (option): any => {
+    setSelectedOption(option);
+  };
+
+  const handleQuestion = () => {
+    setCurrentSection("question");
+
+    const nextFeedback = currentFeedback + 1;
+
+    if (nextFeedback < passwordQuestionsData.length) {
+      setCurrentFeedback(nextFeedback);
+    }
+  };
+
+  const handleFeedback = () => {
+    isOptionCorrect();
+
+    setCurrentSection("feedback");
+
+    const nextQuestion = currentQuestion + 1;
+
+    if (nextQuestion < passwordQuestionsData.length) {
+      setCurrentQuestion(nextQuestion);
+    }
+  };
+
+  const isOptionCorrect = () => {
+    const currentOption =
+      passwordQuestionsData[currentQuestion].answerOptions[selectedOption]
+        .isCorrect;
+
+    setQuestionResult(currentOption);
+  };
 
   const handleButtonNext = () => {
     const nextContent = currentContent + 1;
@@ -67,32 +112,32 @@ export function MainPage() {
     setCurrentContent(nextContent);
   };
 
+  const isQuestionSectionActive = true;
+
   return (
     <Main>
       <ContainerMobile>
-        <HeaderMobile
-          title={"senhas seguras na internet"}
-          step={currentContent + 1}
-          totalSteps={passwordContent.length}
-        />
+        <HeaderMobileStyle>
+          <Menus>{isQuestionSectionActive && <ReturnButton />}</Menus>
+          <HeadingOne text={"senhas seguras na internet"} />
+          <ProgressBar
+            step={currentContent + 1}
+            totalSteps={passwordContent.length}
+          ></ProgressBar>
+        </HeaderMobileStyle>
 
         {contentSection && (
           <>
-            <ContentCard
+            <ContentSection
               title={passwordContent[currentContent].title}
               content={passwordContent[currentContent].text}
               imageUrl={`../src/img/${passwordContent[currentContent].image}`}
               imageAlt={passwordContent[currentContent].imageAlt}
+              buttonPreviousOnClick={handleButtonPrevious}
+              imageButtonPrevious={arrowLeft}
+              buttonNextOnClick={handleButtonNext}
+              imageButtonNext={arrowRight}
             />
-
-            <NavigationButtonStyle>
-              <Button onClick={handleButtonPrevious}>
-                <Image src={arrowLeft} alt="Seta Voltar" />
-              </Button>
-              <Button onClick={handleButtonNext}>
-                <Image src={arrowRight} alt="Seta Prosseguir" />
-              </Button>
-            </NavigationButtonStyle>
           </>
         )}
 
@@ -106,8 +151,23 @@ export function MainPage() {
           />
         )}
 
-        {questionSection && <PasswordQuestionsContainer />}
-        
+        {questionSection && (
+          <PasswordQuestionsContainer
+            currentFeedback={currentFeedback}
+            currentQuestion={currentQuestion}
+            selectedOption={selectedOption}
+            currentSection={currentSection}
+            questionResult={questionResult}
+            anwserOptions={anwserOptions}
+            handleSelectedOption={handleSelectedOption}
+            handleButtonContinue={
+              currentSection === "feedback"
+                ? () => handleQuestion()
+                : () => handleFeedback()
+            }
+            buttonContinueText={"Continuar"}
+          />
+        )}
       </ContainerMobile>
     </Main>
   );
