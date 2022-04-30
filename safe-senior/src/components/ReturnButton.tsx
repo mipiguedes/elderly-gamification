@@ -6,6 +6,7 @@ const Button = styled("button", {
   borderRadius: 10,
   padding: "5px",
   background: "none",
+  cursor: "pointer"
 });
 
 const Image = styled("img", {

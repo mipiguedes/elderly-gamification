@@ -13,8 +13,7 @@ type PasswordQuestionsContainerProps = {
   anwserOptions: any;
   handleSelectedOption: Function;
   handleButtonContinue: Function;
-  buttonContinueText: string
-
+  buttonContinueText: string;
 };
 
 const ButtonContainer = styled("div", {

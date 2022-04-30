@@ -40,7 +40,7 @@ const Menus = styled("div", {
 });
 
 export function MainPage() {
-  const [currentContent, setCurrentContent] = useState(0);
+  //Sections States
 
   const [contentSection, setContentSection] = useState(false);
 
@@ -48,19 +48,21 @@ export function MainPage() {
 
   const [intermediarySection, setIntermediarySection] = useState(false);
 
-  //
+  const [currentSection, setCurrentSection] = useState("question");
+
+  //Current Sections States
+
+  const [progressBarValue, setProgressBarValue] = useState(0);
+
+  const [currentContent, setCurrentContent] = useState(0);
 
   const [currentFeedback, setCurrentFeedback] = useState(0);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  const [currentSection, setCurrentSection] = useState("question");
-
   const [selectedOption, setSelectedOption] = useState(0);
 
   const [questionResult, setQuestionResult] = useState(true);
-
-  const anwserOptions = passwordQuestionsData[currentQuestion].answerOptions;
 
   const handleSelectedOption = (option): any => {
     setSelectedOption(option);
@@ -74,6 +76,8 @@ export function MainPage() {
     if (nextFeedback < passwordQuestionsData.length) {
       setCurrentFeedback(nextFeedback);
     }
+
+    SumProgressBarValue();
   };
 
   const handleFeedback = () => {
@@ -86,6 +90,8 @@ export function MainPage() {
     if (nextQuestion < passwordQuestionsData.length) {
       setCurrentQuestion(nextQuestion);
     }
+
+    SumProgressBarValue();
   };
 
   const isOptionCorrect = () => {
@@ -105,11 +111,43 @@ export function MainPage() {
     }
 
     setCurrentContent(nextContent);
+    SumProgressBarValue();
   };
 
   const handleButtonPrevious = () => {
-    const nextContent = currentContent - 1;
-    setCurrentContent(nextContent);
+    const previousContent = currentContent - 1;
+    setCurrentContent(previousContent);
+    SubProgressBarValue();
+  };
+
+  const handlePreviousSection = () => {
+    if (currentSection === "question") {
+      setCurrentSection("feedback");
+      const previousFeedback = currentFeedback - 1;
+      setCurrentFeedback(previousFeedback);
+    }
+
+    if (currentSection === "feedback") {
+      setCurrentSection("question");
+      const previousQuestion = currentQuestion - 1;
+      setCurrentQuestion(previousQuestion);
+    }
+
+    SubProgressBarValue();
+  };
+
+  const SumProgressBarValue = () => {
+    const newValue = progressBarValue + 1;
+    setProgressBarValue(newValue);
+  };
+
+  const SubProgressBarValue = () => {
+    const newValue = progressBarValue - 1;
+    setProgressBarValue(newValue);
+  };
+
+  const ProgressBarInitialValue = () => {
+    setProgressBarValue(0);
   };
 
   const isQuestionSectionActive = true;
@@ -118,10 +156,14 @@ export function MainPage() {
     <Main>
       <ContainerMobile>
         <HeaderMobileStyle>
-          <Menus>{isQuestionSectionActive && <ReturnButton />}</Menus>
+          <Menus>
+            {isQuestionSectionActive && (
+              <ReturnButton onClick={handlePreviousSection} />
+            )}
+          </Menus>
           <HeadingOne text={"senhas seguras na internet"} />
           <ProgressBar
-            step={currentContent + 1}
+            step={progressBarValue}
             totalSteps={passwordContent.length}
           ></ProgressBar>
         </HeaderMobileStyle>
@@ -158,7 +200,7 @@ export function MainPage() {
             selectedOption={selectedOption}
             currentSection={currentSection}
             questionResult={questionResult}
-            anwserOptions={anwserOptions}
+            anwserOptions={passwordQuestionsData[currentQuestion].answerOptions}
             handleSelectedOption={handleSelectedOption}
             handleButtonContinue={
               currentSection === "feedback"
