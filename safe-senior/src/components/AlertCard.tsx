@@ -28,15 +28,14 @@ const CartoonImage = styled("img", {
   borderRadius: "50%",
   boxSizing: "border-box",
   objectFit: "cover",
-  objectPosition: 100 % 0,
-  marginRight: "0.75rem",
+  objectPosition: 100 % 0
 });
 
 const Title = styled("h2", {
   fontSize: "1rem",
   fontWeight: 500,
   color: "#13274A",
-  margin: 0,
+  margin: "1rem",
   lineHeight: 1.3,
   textAlign: "center"
 });

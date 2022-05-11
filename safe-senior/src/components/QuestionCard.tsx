@@ -1,6 +1,4 @@
 import { styled } from "@stitches/react";
-import { useState } from "react";
-import { Button } from "./Button";
 
 type QuestionCardProps = {
   question: string;

@@ -31,7 +31,7 @@ export function PasswordQuestionsContainer({
   anwserOptions,
   handleSelectedOption,
   handleButtonContinue,
-  buttonContinueText
+  buttonContinueText,
 }: PasswordQuestionsContainerProps) {
   return (
     <>
@@ -67,7 +67,14 @@ export function PasswordQuestionsContainer({
       )}
 
       <ButtonContainer>
-        <Button onClick={handleButtonContinue} text={buttonContinueText} />
+        <Button
+          backgroundColor={
+            "linear-gradient(271.96deg, #125BDE -6.04%, #1255CE -6.02%, #13274A 110.71%);"
+          }
+          width={"100%"}
+          onClick={handleButtonContinue}
+          text={buttonContinueText}
+        />
       </ButtonContainer>
     </>
   );
