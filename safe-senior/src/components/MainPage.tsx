@@ -60,28 +60,6 @@ export function MainPage() {
   const [currentQuestionSection, setCurrentQuestionSection] =
     useState("question");
 
-  //Session Storege
-
-  useEffect(() => {
-    const storegedCurrentSection = sessionStorage.getItem("currentSection");
-
-    if (storegedCurrentSection) {
-      if (storegedCurrentSection === "content") {
-        setContentSection(true);
-      }
-
-      if (storegedCurrentSection === "question") {
-        setQuestionSection(true);
-      }
-    } else {
-      sessionStorage.setItem("currentSection", "content");
-    }
-  });
-
-  const handleCurrentSection = (section: string) => {
-    sessionStorage.setItem("currentSection", section);
-  };
-
   //Current Sections States
 
   const [progressBarValue, setProgressBarValue] = useState(0);
@@ -95,6 +73,56 @@ export function MainPage() {
   const [selectedOption, setSelectedOption] = useState(0);
 
   const [questionResult, setQuestionResult] = useState(true);
+
+  //Cache Storege
+
+  useEffect(() => {
+    const storegedCurrentSection = localStorage.getItem("currentSection");
+
+    if (storegedCurrentSection) {
+      if (storegedCurrentSection === "content") {
+        setContentSection(true);
+      }
+
+      if (storegedCurrentSection === "question") {
+        setQuestionSection(true);
+      }
+    } else {
+      localStorage.setItem("currentSection", "content");
+      setContentSection(true);
+    }
+  });
+
+  useEffect(() => {
+    const storegedCurrentContent = Number(
+      localStorage.getItem("currentContent")
+    );
+
+    if (storegedCurrentContent) {
+      setCurrentContent(storegedCurrentContent);
+    }
+
+    const storegCurrentQuestion = Number(
+      localStorage.getItem("currentQuestion")
+    );
+
+    if (storegCurrentQuestion) {
+      setCurrentQuestion(storegCurrentQuestion);
+    }
+
+  });
+
+  const handleStoragedCurrentSection = (section: string) => {
+    localStorage.setItem("currentSection", section);
+  };
+
+  const handleStoragedCurrentContent = (content:string) => {
+    localStorage.setItem("currentContent", content);
+  };
+
+  const handleStoragedCurrentQuestion = (question:string) => {
+    localStorage.setItem("currentQuestion", question);
+  };
 
   const handleSelectedOption = (option): any => {
     setSelectedOption(option);
@@ -121,6 +149,7 @@ export function MainPage() {
 
     if (nextQuestion < passwordQuestionsData.length) {
       setCurrentQuestion(nextQuestion);
+      handleStoragedCurrentQuestion(String(nextQuestion));
     }
 
     SumProgressBarValue();
@@ -140,9 +169,10 @@ export function MainPage() {
     if (nextContent >= passwordContent.length) {
       setIntermediarySection(true);
       setContentSection(false);
-      handleCurrentSection("intermediary");
+      handleStoragedCurrentSection("intermediary");
     } else {
       setCurrentContent(nextContent);
+      handleStoragedCurrentContent(String(nextContent));
     }
 
     SumProgressBarValue();
@@ -151,6 +181,7 @@ export function MainPage() {
   const handleButtonPrevious = () => {
     const previousContent = currentContent - 1;
     setCurrentContent(previousContent);
+    handleStoragedCurrentContent(String(previousContent));
     SubProgressBarValue();
   };
 
@@ -165,16 +196,18 @@ export function MainPage() {
       setCurrentQuestionSection("question");
       const previousQuestion = currentQuestion - 1;
       setCurrentQuestion(previousQuestion);
+      handleStoragedCurrentQuestion(String(previousQuestion));
     }
 
     SubProgressBarValue();
   };
 
   const handleIntermediaryButton = () => {
+    handleStoragedCurrentSection("question");
     setIntermediarySection(false);
     setQuestionSection(true);
     setProgressBarValue(0);
-  }
+  };
 
   const SumProgressBarValue = () => {
     const newValue = progressBarValue + 1;
@@ -184,10 +217,6 @@ export function MainPage() {
   const SubProgressBarValue = () => {
     const newValue = progressBarValue - 1;
     setProgressBarValue(newValue);
-  };
-
-  const ProgressBarInitialValue = () => {
-    setProgressBarValue(0);
   };
 
   const isQuestionSectionActive = true;
@@ -230,20 +259,25 @@ export function MainPage() {
         )}
 
         {intermediarySection && (
-         <>
-           <AlertCard
-            image={`../src/img/dedos-cruzados.png`}
-            imageAlt={"idosa com dedos cruzados sorrindo"}
-            text={
-              "<p><b>Você topa colocar esse conteúdo em prática?</b></p><p>Estou torcendo por você!</p>"
-            }
-          />
-          <ButtonContainer>
-            <Button text={"Vamos lá"} backgroundColor={
+          <>
+            <AlertCard
+              image={`../src/img/dedos-cruzados.png`}
+              imageAlt={"idosa com dedos cruzados sorrindo"}
+              text={
+                "<p><b>Você topa colocar esse conteúdo em prática?</b></p><p>Estou torcendo por você!</p>"
+              }
+            />
+            <ButtonContainer>
+              <Button
+                text={"Vamos lá"}
+                backgroundColor={
                   "linear-gradient(271.96deg, #125BDE -6.04%, #1255CE -6.02%, #13274A 110.71%);"
-                } width={"100%"} onClick={handleIntermediaryButton}></Button>
-          </ButtonContainer>
-         </>
+                }
+                width={"100%"}
+                onClick={handleIntermediaryButton}
+              ></Button>
+            </ButtonContainer>
+          </>
         )}
 
         {questionSection && (
