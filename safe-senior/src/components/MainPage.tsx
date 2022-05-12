@@ -45,7 +45,7 @@ const Menus = styled("div", {
 const ButtonContainer = styled("div", {
   margin: "1.5rem",
   display: "flex",
-  justifyContent: "center",
+  justifyContent: "space-between",
 });
 
 export function MainPage() {
@@ -55,7 +55,9 @@ export function MainPage() {
 
   const [intermediarySection, setIntermediarySection] = useState(false);
 
-  const [exitSection, setexitSection] = useState(false);
+  const [exitSection, setExitSection] = useState(false);
+
+  const [initialSection, setInitialSection] = useState(false);
 
   const [currentQuestionSection, setCurrentQuestionSection] =
     useState("question");
@@ -94,38 +96,33 @@ export function MainPage() {
   });
 
   useEffect(() => {
-    const storegedCurrentContent = Number(
+    const storagedCurrentContent = Number(
       localStorage.getItem("currentContent")
     );
 
-    if (storegedCurrentContent) {
-      setCurrentContent(storegedCurrentContent);
-    }
-
-    const storegCurrentQuestion = Number(
+    const storagedCurrentQuestion = Number(
       localStorage.getItem("currentQuestion")
     );
 
-    if (storegCurrentQuestion) {
-      setCurrentQuestion(storegCurrentQuestion);
+    const storagedProgressBarValue = Number(
+      localStorage.getItem("progressBarValue")
+    );
+
+    if (storagedCurrentContent) {
+      setCurrentContent(storagedCurrentContent);
     }
 
+    if (storagedCurrentQuestion) {
+      setCurrentQuestion(storagedCurrentQuestion);
+    }
+
+    if (storagedProgressBarValue) {
+      setProgressBarValue(storagedProgressBarValue);
+    }
   });
 
-  const handleStoragedCurrentSection = (section: string) => {
-    localStorage.setItem("currentSection", section);
-  };
-
-  const handleStoragedCurrentContent = (content:string) => {
-    localStorage.setItem("currentContent", content);
-  };
-
-  const handleStoragedCurrentQuestion = (question:string) => {
-    localStorage.setItem("currentQuestion", question);
-  };
-
-  const handleSelectedOption = (option): any => {
-    setSelectedOption(option);
+  const handleSetItemOnCache = (key: string, value: string) => {
+    localStorage.setItem(key, value);
   };
 
   const handleQuestion = () => {
@@ -149,7 +146,7 @@ export function MainPage() {
 
     if (nextQuestion < passwordQuestionsData.length) {
       setCurrentQuestion(nextQuestion);
-      handleStoragedCurrentQuestion(String(nextQuestion));
+      handleSetItemOnCache("currentQuestion", String(nextQuestion));
     }
 
     SumProgressBarValue();
@@ -169,10 +166,10 @@ export function MainPage() {
     if (nextContent >= passwordContent.length) {
       setIntermediarySection(true);
       setContentSection(false);
-      handleStoragedCurrentSection("intermediary");
+      handleSetItemOnCache("currentSection", "intermediary");
     } else {
       setCurrentContent(nextContent);
-      handleStoragedCurrentContent(String(nextContent));
+      handleSetItemOnCache("currentContent", String(nextContent));
     }
 
     SumProgressBarValue();
@@ -181,7 +178,7 @@ export function MainPage() {
   const handleButtonPrevious = () => {
     const previousContent = currentContent - 1;
     setCurrentContent(previousContent);
-    handleStoragedCurrentContent(String(previousContent));
+    handleSetItemOnCache("currentContent", String(previousContent));
     SubProgressBarValue();
   };
 
@@ -196,30 +193,68 @@ export function MainPage() {
       setCurrentQuestionSection("question");
       const previousQuestion = currentQuestion - 1;
       setCurrentQuestion(previousQuestion);
-      handleStoragedCurrentQuestion(String(previousQuestion));
+      handleSetItemOnCache("currentQuestion", String(previousQuestion));
     }
 
     SubProgressBarValue();
   };
 
   const handleIntermediaryButton = () => {
-    handleStoragedCurrentSection("question");
+    handleSetItemOnCache("currentSection", "question");
     setIntermediarySection(false);
     setQuestionSection(true);
     setProgressBarValue(0);
+    handleSetItemOnCache("progressBarValue", String(0));
   };
+
+  const handleExitSection = () => {
+    setIntermediarySection(false);
+    setQuestionSection(false);
+    setContentSection(false);
+    setExitSection(true);
+  };
+
+  const handleReturnButton = () => {
+    const storagedCurrentSection = localStorage.getItem("currentSection");
+
+    if (storagedCurrentSection === "content") {
+      handleSetItemOnCache("currentSection", "content");
+      setExitSection(false);
+      setContentSection(true);
+    }
+
+    if (storagedCurrentSection === "question") {
+      handleSetItemOnCache("currentSection", "question");
+      setExitSection(false);
+      setQuestionSection(true);
+    }
+  };
+
+  const handleExitButton = () => {
+    handleSetItemOnCache("currentSection", "initial");
+    setExitSection(false);
+    setContentSection(false);
+    setQuestionSection(false);
+    setInitialSection(true);
+  }
 
   const SumProgressBarValue = () => {
     const newValue = progressBarValue + 1;
     setProgressBarValue(newValue);
+    handleSetItemOnCache("progressBarValue", String(newValue));
   };
 
   const SubProgressBarValue = () => {
     const newValue = progressBarValue - 1;
     setProgressBarValue(newValue);
+    handleSetItemOnCache("progressBarValue", String(newValue));
   };
 
-  const isQuestionSectionActive = true;
+  const isContentSectionActive = contentSection && exitSection === false;
+
+  const isQuestionSectionActive = questionSection && exitSection === false;
+
+  const isIntermediarySection = intermediarySection && exitSection === false;
 
   return (
     <Main>
@@ -229,21 +264,31 @@ export function MainPage() {
             {isQuestionSectionActive && (
               <ReturnButton onClick={handlePreviousSection} />
             )}
-            <Button
-              text={"sair"}
-              width={"fit-content"}
-              onClick={handlePreviousSection}
-              backgroundColor={"#125BDE"}
-            ></Button>
+            {exitSection === false && (
+              <Button
+                text={"sair"}
+                width={"fit-content"}
+                onClick={handleExitSection}
+                backgroundColor={"#125BDE"}
+              />
+            )}
           </Menus>
           <HeadingOne text={"senhas seguras na internet"} />
-          <ProgressBar
-            step={progressBarValue}
-            totalSteps={passwordContent.length}
-          ></ProgressBar>
+          {exitSection === false && (
+            <ProgressBar
+              step={progressBarValue}
+              totalSteps={passwordContent.length}
+            ></ProgressBar>
+          )}
         </HeaderMobileStyle>
 
-        {contentSection && (
+        {initialSection && (
+          <>
+            <p>Initial page</p>
+          </>
+        )}
+
+        {isContentSectionActive && (
           <>
             <ContentSection
               title={passwordContent[currentContent].title}
@@ -258,7 +303,7 @@ export function MainPage() {
           </>
         )}
 
-        {intermediarySection && (
+        {isIntermediarySection && (
           <>
             <AlertCard
               image={`../src/img/dedos-cruzados.png`}
@@ -280,7 +325,7 @@ export function MainPage() {
           </>
         )}
 
-        {questionSection && (
+        {isQuestionSectionActive && (
           <PasswordQuestionsContainer
             currentFeedback={currentFeedback}
             currentQuestion={currentQuestion}
@@ -288,7 +333,7 @@ export function MainPage() {
             currentSection={currentQuestionSection}
             questionResult={questionResult}
             anwserOptions={passwordQuestionsData[currentQuestion].answerOptions}
-            handleSelectedOption={handleSelectedOption}
+            handleSelectedOption={setSelectedOption}
             handleButtonContinue={
               currentQuestionSection === "feedback"
                 ? () => handleQuestion()
@@ -311,9 +356,15 @@ export function MainPage() {
                 backgroundColor={
                   "linear-gradient(271.96deg, #125BDE -6.04%, #1255CE -6.02%, #13274A 110.71%);"
                 }
-                width={"100%"}
-                onClick={handleFeedback}
-              ></Button>
+                width={"49%"}
+                onClick={handleReturnButton}
+              />
+              <Button
+                text={"Sair"}
+                backgroundColor={"#E64E3D"}
+                width={"49%"}
+                onClick={handleExitButton}
+              />
             </ButtonContainer>
           </>
         )}
