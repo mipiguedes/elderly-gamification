@@ -66,6 +66,8 @@ export function MainPage() {
 
   const [progressBarValue, setProgressBarValue] = useState(0);
 
+  const [totalSteps, setTotalSteps] = useState(0);
+
   const [currentContent, setCurrentContent] = useState(0);
 
   const [currentFeedback, setCurrentFeedback] = useState(0);
@@ -84,14 +86,19 @@ export function MainPage() {
     if (storegedCurrentSection) {
       if (storegedCurrentSection === "content") {
         setContentSection(true);
+        setTotalSteps(passwordContent.length);
+        
+        
       }
 
       if (storegedCurrentSection === "question") {
         setQuestionSection(true);
+        setTotalSteps(passwordQuestionsData.length);
       }
     } else {
       localStorage.setItem("currentSection", "content");
       setContentSection(true);
+      setTotalSteps(passwordContent.length);
     }
   });
 
@@ -236,7 +243,7 @@ export function MainPage() {
     setContentSection(false);
     setQuestionSection(false);
     setInitialSection(true);
-  }
+  };
 
   const SumProgressBarValue = () => {
     const newValue = progressBarValue + 1;
@@ -256,14 +263,20 @@ export function MainPage() {
 
   const isIntermediarySection = intermediarySection && exitSection === false;
 
+  const isReturnButtonOnQuestionSectionActive =
+    isQuestionSectionActive && currentQuestion != 0;
+
   return (
     <Main>
       <ContainerMobile>
         <HeaderMobileStyle>
           <Menus>
-            {isQuestionSectionActive && (
-              <ReturnButton onClick={handlePreviousSection} />
-            )}
+            <div>
+              {isReturnButtonOnQuestionSectionActive && (
+                <ReturnButton onClick={handlePreviousSection} />
+              )}
+            </div>
+
             {exitSection === false && (
               <Button
                 text={"sair"}
@@ -277,7 +290,7 @@ export function MainPage() {
           {exitSection === false && (
             <ProgressBar
               step={progressBarValue}
-              totalSteps={passwordContent.length}
+              totalSteps={totalSteps}
             ></ProgressBar>
           )}
         </HeaderMobileStyle>
