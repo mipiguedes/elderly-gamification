@@ -7,6 +7,8 @@ import { ContentSection } from "./ContentSection";
 import { AlertCard } from "./AlertCard";
 import { ReturnButton } from "./ReturnButton";
 import { Button } from "./Button";
+import { AchievementSection } from "./AchievementSection";
+
 import { PasswordQuestionsContainer } from "./PasswordQuestionsContainer";
 import passwordQuestionsData from "../passwordQuestions.json";
 import passwordContent from "../passwordContent.json";
@@ -57,6 +59,8 @@ export function MainPage() {
 
   const [exitSection, setExitSection] = useState(false);
 
+  const [achievementSection, setAchievementSection] = useState(false);
+
   const [initialSection, setInitialSection] = useState(false);
 
   const [currentQuestionSection, setCurrentQuestionSection] =
@@ -87,8 +91,6 @@ export function MainPage() {
       if (storegedCurrentSection === "content") {
         setContentSection(true);
         setTotalSteps(passwordContent.length);
-        
-        
       }
 
       if (storegedCurrentSection === "question") {
@@ -266,6 +268,19 @@ export function MainPage() {
   const isReturnButtonOnQuestionSectionActive =
     isQuestionSectionActive && currentQuestion != 0;
 
+  const handleContinueFunction = () => {
+    if (currentQuestion >= passwordQuestionsData.length) {
+      setAchievementSection(true);
+      setQuestionSection(false);
+    } else {
+      if (currentQuestionSection === "feedback") {
+        () => handleQuestion();
+      } else {
+        () => handleFeedback();
+      }
+    }
+  };
+
   return (
     <Main>
       <ContainerMobile>
@@ -347,11 +362,7 @@ export function MainPage() {
             questionResult={questionResult}
             anwserOptions={passwordQuestionsData[currentQuestion].answerOptions}
             handleSelectedOption={setSelectedOption}
-            handleButtonContinue={
-              currentQuestionSection === "feedback"
-                ? () => handleQuestion()
-                : () => handleFeedback()
-            }
+            handleButtonContinue={handleContinueFunction}
             buttonContinueText={"Continuar"}
           />
         )}
@@ -380,6 +391,18 @@ export function MainPage() {
               />
             </ButtonContainer>
           </>
+        )}
+
+        {achievementSection && (
+          <AchievementSection
+            title={"Você completou o seu aprendizado sobre senhas"}
+            text={
+              "<p>Agora você sabe como manter suas senhas seguras na internet!</p><p>Acredite, tão importante quanto não compartilhar sua senha com terceiros é criar senhas bem difíceis de serem desvendadas.</p>"
+            }
+            image={`../src/img/festejando.png`}
+            imageAlt={"idosa festejando"}
+            imageMedal={`../src/img/emblema.png`}
+          />
         )}
       </ContainerMobile>
     </Main>
