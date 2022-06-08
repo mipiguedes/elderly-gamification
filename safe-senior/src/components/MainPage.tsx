@@ -80,7 +80,7 @@ export function MainPage() {
 
   const [selectedOption, setSelectedOption] = useState(0);
 
-  const [questionResult, setQuestionResult] = useState(true);
+  const [questionResult, setQuestionResult] = useState(false);
 
   //Cache Storege
 
@@ -135,30 +135,42 @@ export function MainPage() {
   };
 
   const handleQuestion = () => {
-    setCurrentQuestionSection("question");
-
-    const nextFeedback = currentFeedback + 1;
-
-    if (nextFeedback < passwordQuestionsData.length) {
-      setCurrentFeedback(nextFeedback);
-    }
-
-    SumProgressBarValue();
-  };
-
-  const handleFeedback = () => {
-    isOptionCorrect();
-
-    setCurrentQuestionSection("feedback");
-
     const nextQuestion = currentQuestion + 1;
 
     if (nextQuestion < passwordQuestionsData.length) {
-      setCurrentQuestion(nextQuestion);
-      handleSetItemOnCache("currentQuestion", String(nextQuestion));
+      setCurrentQuestionSection("question");
+
+      if (isOptionCorrect()) {
+        const nextFeedback = currentFeedback + 1;
+        if (nextFeedback < passwordQuestionsData.length) {
+          setCurrentFeedback(nextFeedback);
+        }
+
+        SumProgressBarValue();
+      }
+    } 
+  };
+
+  const handleFeedback = () => {
+    setCurrentQuestionSection("feedback");
+
+    if (currentQuestion <= passwordQuestionsData.length) {
+      const nextQuestion = currentQuestion + 1;
+      if (isOptionCorrect()) {
+      
+        if (nextQuestion < passwordQuestionsData.length) {
+          setCurrentQuestion(nextQuestion);
+          handleSetItemOnCache("currentQuestion", String(nextQuestion));
+        }
+  
+        SumProgressBarValue();
+      }
+    }else{
+      setAchievementSection(true);
+      setQuestionSection(false);
     }
 
-    SumProgressBarValue();
+    
   };
 
   const isOptionCorrect = () => {
@@ -166,7 +178,11 @@ export function MainPage() {
       passwordQuestionsData[currentQuestion].answerOptions[selectedOption]
         .isCorrect;
 
+    console.log("currentQuestion", currentQuestion);
+
     setQuestionResult(currentOption);
+
+    return currentOption;
   };
 
   const handleButtonNext = () => {
@@ -259,6 +275,14 @@ export function MainPage() {
     handleSetItemOnCache("progressBarValue", String(newValue));
   };
 
+  const handleContinueQuestionSection = () => {
+    if (currentQuestionSection === "feedback") {
+      handleQuestion();
+    } else {
+      handleFeedback();
+    }
+  };
+
   const isContentSectionActive = contentSection && exitSection === false;
 
   const isQuestionSectionActive = questionSection && exitSection === false;
@@ -267,19 +291,6 @@ export function MainPage() {
 
   const isReturnButtonOnQuestionSectionActive =
     isQuestionSectionActive && currentQuestion != 0;
-
-  const handleContinueFunction = () => {
-    if (currentQuestion >= passwordQuestionsData.length) {
-      setAchievementSection(true);
-      setQuestionSection(false);
-    } else {
-      if (currentQuestionSection === "feedback") {
-        () => handleQuestion();
-      } else {
-        () => handleFeedback();
-      }
-    }
-  };
 
   return (
     <Main>
@@ -362,7 +373,7 @@ export function MainPage() {
             questionResult={questionResult}
             anwserOptions={passwordQuestionsData[currentQuestion].answerOptions}
             handleSelectedOption={setSelectedOption}
-            handleButtonContinue={handleContinueFunction}
+            handleButtonContinue={handleContinueQuestionSection}
             buttonContinueText={"Continuar"}
           />
         )}

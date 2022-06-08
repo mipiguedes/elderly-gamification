@@ -28,6 +28,7 @@ const NavigationButtonStyle = styled("div", {
     border: 0,
     borderRadius: 10,
     padding: "5px",
+    cursor: "pointer"
   });
   
   const Image = styled("img", {
