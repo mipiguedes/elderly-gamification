@@ -1,11 +1,9 @@
-import { MainPage } from "./components/MainPage"
 import './App.css';
+import { RoutesSection } from "./routes";
 
 function App() {
   return (
-    <>
-      <MainPage/>
-    </>
+    <RoutesSection/>
   );
 }
 
