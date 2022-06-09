@@ -7,7 +7,6 @@ import { ContentSection } from "./ContentSection";
 import { AlertCard } from "./AlertCard";
 import { ReturnButton } from "./ReturnButton";
 import { Button } from "./Button";
-import { AchievementSection } from "./AchievementSection";
 
 import { PasswordQuestionsContainer } from "./PasswordQuestionsContainer";
 import passwordQuestionsData from "../passwordQuestions.json";
@@ -58,8 +57,6 @@ export function MainPage() {
   const [intermediarySection, setIntermediarySection] = useState(false);
 
   const [exitSection, setExitSection] = useState(false);
-
-  const [achievementSection, setAchievementSection] = useState(false);
 
   const [initialSection, setInitialSection] = useState(false);
 
@@ -135,50 +132,36 @@ export function MainPage() {
   };
 
   const handleQuestion = () => {
-    const nextQuestion = currentQuestion + 1;
+    setCurrentQuestionSection("question");
 
-    if (nextQuestion < passwordQuestionsData.length) {
-      setCurrentQuestionSection("question");
-
-      if (isOptionCorrect()) {
-        const nextFeedback = currentFeedback + 1;
-        if (nextFeedback < passwordQuestionsData.length) {
-          setCurrentFeedback(nextFeedback);
-        }
-
-        SumProgressBarValue();
+    if (isOptionCorrect()) {
+      const nextFeedback = currentFeedback + 1;
+      if (nextFeedback < passwordQuestionsData.length) {
+        setCurrentFeedback(nextFeedback);
       }
-    } 
+
+      SumProgressBarValue();
+    }
   };
 
   const handleFeedback = () => {
     setCurrentQuestionSection("feedback");
 
-    if (currentQuestion <= passwordQuestionsData.length) {
-      const nextQuestion = currentQuestion + 1;
-      if (isOptionCorrect()) {
-      
-        if (nextQuestion < passwordQuestionsData.length) {
-          setCurrentQuestion(nextQuestion);
-          handleSetItemOnCache("currentQuestion", String(nextQuestion));
-        }
-  
-        SumProgressBarValue();
+    const nextQuestion = currentQuestion + 1;
+    if (isOptionCorrect()) {
+      if (nextQuestion < passwordQuestionsData.length) {
+        setCurrentQuestion(nextQuestion);
+        handleSetItemOnCache("currentQuestion", String(nextQuestion));
       }
-    }else{
-      setAchievementSection(true);
-      setQuestionSection(false);
-    }
 
-    
+      SumProgressBarValue();
+    }
   };
 
   const isOptionCorrect = () => {
     const currentOption =
       passwordQuestionsData[currentQuestion].answerOptions[selectedOption]
         .isCorrect;
-
-    console.log("currentQuestion", currentQuestion);
 
     setQuestionResult(currentOption);
 
@@ -267,6 +250,8 @@ export function MainPage() {
     const newValue = progressBarValue + 1;
     setProgressBarValue(newValue);
     handleSetItemOnCache("progressBarValue", String(newValue));
+    
+    
   };
 
   const SubProgressBarValue = () => {
@@ -372,6 +357,7 @@ export function MainPage() {
             currentSection={currentQuestionSection}
             questionResult={questionResult}
             anwserOptions={passwordQuestionsData[currentQuestion].answerOptions}
+            progressBarValue={progressBarValue}
             handleSelectedOption={setSelectedOption}
             handleButtonContinue={handleContinueQuestionSection}
             buttonContinueText={"Continuar"}
@@ -402,18 +388,6 @@ export function MainPage() {
               />
             </ButtonContainer>
           </>
-        )}
-
-        {achievementSection && (
-          <AchievementSection
-            title={"Você completou o seu aprendizado sobre senhas"}
-            text={
-              "<p>Agora você sabe como manter suas senhas seguras na internet!</p><p>Acredite, tão importante quanto não compartilhar sua senha com terceiros é criar senhas bem difíceis de serem desvendadas.</p>"
-            }
-            image={`../src/img/festejando.png`}
-            imageAlt={"idosa festejando"}
-            imageMedal={`../src/img/emblema.png`}
-          />
         )}
       </ContainerMobile>
     </Main>

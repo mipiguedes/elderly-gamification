@@ -11,6 +11,7 @@ type PasswordQuestionsContainerProps = {
   currentSection: string;
   questionResult: boolean;
   anwserOptions: any;
+  progressBarValue?: number;
   handleSelectedOption: Function;
   handleButtonContinue: Function;
   buttonContinueText: string;
@@ -29,10 +30,16 @@ export function PasswordQuestionsContainer({
   currentSection,
   questionResult,
   anwserOptions,
+  progressBarValue,
   handleSelectedOption,
   handleButtonContinue,
   buttonContinueText,
 }: PasswordQuestionsContainerProps) {
+
+  const sendToMedalsPage = () => {
+    window.location.href = "/metalhes";
+  }
+
   return (
     <>
       {currentSection === "question" && (
@@ -67,12 +74,14 @@ export function PasswordQuestionsContainer({
       )}
 
       <ButtonContainer>
+
+
         <Button
           backgroundColor={
             "linear-gradient(271.96deg, #125BDE -6.04%, #1255CE -6.02%, #13274A 110.71%);"
           }
           width={"100%"}
-          onClick={handleButtonContinue}
+          onClick={progressBarValue === passwordQuestionsData.length ? sendToMedalsPage : handleButtonContinue}
           text={buttonContinueText}
         />
       </ButtonContainer>
