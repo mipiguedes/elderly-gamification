@@ -6,7 +6,8 @@ type ProgressBarProps = {
 };
 
 export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
-  const completedSteps = ((step * 100) / totalSteps) <= 100 ? ((step * 100) / totalSteps) : 100;
+  const completedSteps =
+    (step * 100) / totalSteps <= 100 ? (step * 100) / totalSteps : 100;
 
   const ContainerStyles = styled("div", {
     height: 12,
@@ -34,6 +35,7 @@ export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
   return (
     <ContainerStyles>
       <FillerStyles
+        aria-live="polite"
         role="progressbar"
         aria-valuenow={`${completedSteps}`}
         aria-valuemin="0"

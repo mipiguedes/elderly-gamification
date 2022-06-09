@@ -37,7 +37,11 @@ export function PasswordQuestionsContainer({
 }: PasswordQuestionsContainerProps) {
 
   const sendToMedalsPage = () => {
-    window.location.href = "/metalhes";
+    window.location.href = "/medalhas";
+    localStorage.setItem("currentSection", "content");
+    localStorage.setItem("currentContent", "0");
+    localStorage.setItem("progressBarValue", "0");
+    localStorage.setItem("currentQuestion", "0");
   }
 
   return (

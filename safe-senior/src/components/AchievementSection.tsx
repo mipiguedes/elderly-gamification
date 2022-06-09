@@ -29,7 +29,12 @@ export function AchievementSection({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+  });
+
+  const TextArea = styled("div", {
+    p: {
+      margin: "0.45rem 0",
+    },
   });
 
   const MedalContainer = styled("div", {
@@ -45,7 +50,7 @@ export function AchievementSection({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center"
+    textAlign: "center",
   });
 
   const Header = styled("div", {
@@ -85,14 +90,13 @@ export function AchievementSection({
           <CartoonImage src={image} alt={imageAlt} />
           <Title>{parse(title)}</Title>
         </Header>
-        {parse(text)}
+        <TextArea>{parse(text)}</TextArea>
       </Container>
       <MedalContainer>
         <ImageMedal
           src={imageMedal}
           alt="medalha aspirante em segurança de senhas na internet"
         />
-        <p>Essa é sua medalha por sua conquista!</p>
       </MedalContainer>
     </>
   );

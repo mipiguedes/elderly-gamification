@@ -21,11 +21,15 @@ const ContentCardStyle = styled("div", {
 const ContentHeader = styled("div", {
   display: "flex",
   alignItems: "center",
+  marginBottom: "1rem",
 });
 
 const ContentBody = styled("div", {
   fontSize: "1rem",
   color: "#13274A",
+  p: {
+    lineHeight: 1.50,
+  },
 });
 
 const CartoonImage = styled("img", {

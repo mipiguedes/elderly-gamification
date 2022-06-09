@@ -2,12 +2,15 @@ import { styled } from "@stitches/react";
 import { ReturnButton } from "./ReturnButton";
 import { HeadingOne } from "./HeadingOne";
 import { ProgressBar } from "./ProgressBar";
+import { Button } from "./Button";
 
 type HeaderMobileProps = {
   title: string;
-  step: number;
-  totalSteps: number;
-  isQuestionSectionActive?: boolean;
+  step?: number;
+  totalSteps?: number;
+  isExitSectionActive?: boolean;
+  onClickButtonExit?: Function;
+  isProgressBarSection?: boolean;
 };
 
 const HeaderMobileStyle = styled("header", {
@@ -32,13 +35,26 @@ export const HeaderMobile = ({
   title,
   step,
   totalSteps,
-  isQuestionSectionActive = true
+  isExitSectionActive = true,
+  isProgressBarSection = false,
+  onClickButtonExit,
 }: HeaderMobileProps) => {
   return (
     <HeaderMobileStyle>
-      <Menus>{isQuestionSectionActive && <ReturnButton />}</Menus>
+      <Menus>
+        {isExitSectionActive === false && (
+          <Button
+            text={"sair"}
+            width={"fit-content"}
+            onClick={onClickButtonExit}
+            backgroundColor={"#125BDE"}
+          />
+        )}
+      </Menus>
       <HeadingOne text={title} />
-      <ProgressBar step={step} totalSteps={totalSteps}></ProgressBar>
+      {isProgressBarSection && (
+        <ProgressBar step={step} totalSteps={totalSteps}></ProgressBar>
+      )}
     </HeaderMobileStyle>
   );
 };

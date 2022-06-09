@@ -11,3 +11,7 @@ body,
 body, button, h1, h2, h3, h4, h5, p, span {
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
+
+p {
+    margin: 0;
+}

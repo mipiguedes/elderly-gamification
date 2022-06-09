@@ -136,6 +136,7 @@ export function MainPage() {
 
     if (isOptionCorrect()) {
       const nextFeedback = currentFeedback + 1;
+      console.log("nextFeedback", nextFeedback);
       if (nextFeedback < passwordQuestionsData.length) {
         setCurrentFeedback(nextFeedback);
       }
