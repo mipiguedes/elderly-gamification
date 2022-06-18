@@ -17,8 +17,6 @@ const NavigationButtonStyle = styled("div", {
     width: "100%",
     display: "flex",
     justifyContent: "space-around",
-    position: "absolute",
-    bottom: "40px",
   });
   
   const Button = styled("button", {

@@ -17,6 +17,13 @@ type PasswordQuestionsContainerProps = {
   buttonContinueText: string;
 };
 
+
+const PasswordQuestionsContainerStyle = styled("div", {
+  overflowY: "auto",
+  maxHeight: "calc(100% - 200px)",
+  length: 0
+});
+
 const ButtonContainer = styled("div", {
   margin: "1.5rem",
   display: "flex",
@@ -45,7 +52,7 @@ export function PasswordQuestionsContainer({
   }
 
   return (
-    <>
+    <PasswordQuestionsContainerStyle>
       {currentSection === "question" && (
         <>
           <QuestionSection
@@ -89,6 +96,6 @@ export function PasswordQuestionsContainer({
           text={buttonContinueText}
         />
       </ButtonContainer>
-    </>
+    </PasswordQuestionsContainerStyle>
   );
 }

@@ -29,6 +29,7 @@ const Option = styled("button", {
   maxHeight: "200px",
   cursor: "pointer",
   transition: "all .0.4s",
+  border: "3px solid #FFFFFF",
   "&:hover": {
     backgroundColor: "#ECECEC",
     border: "3px solid #13274A",

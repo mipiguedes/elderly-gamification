@@ -10,11 +10,11 @@ export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
     (step * 100) / totalSteps <= 100 ? (step * 100) / totalSteps : 100;
 
   const ContainerStyles = styled("div", {
-    height: 12,
+    height: '0.75em',
     width: "100%",
     backgroundColor: "#F0F9FF",
     borderRadius: 50,
-    margin: "0.5rem",
+    margin: "0.5em",
   });
 
   const FillerStyles = styled("div", {

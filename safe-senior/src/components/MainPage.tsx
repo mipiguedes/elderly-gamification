@@ -25,14 +25,27 @@ const Main = styled("div", {
 
 const HeaderMobileStyle = styled("header", {
   backgroundColor: "#13274A",
-  padding: "0.5rem 2rem",
+  padding: "0.5em 2em",
   height: "fit-content",
-  minHeight: "100px",
+  minHeight: "6,25em",
   borderRadius: "0 0 40px 40px",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+});
+
+const ExitButton = styled("button", {
+  width: "fit-content",
+  padding: "0.35em 1.5em",
+  background: "#125BDE",
+  borderRadius: 10,
+  border: 0,
+  cursor: "pointer",
+  fontSize: "1em",
+  fontWeight: 800,
+  color: "#D8EFFF",
+  length: 0
 });
 
 const Menus = styled("div", {
@@ -290,12 +303,7 @@ export function MainPage() {
             </div>
 
             {exitSection === false && (
-              <Button
-                text={"sair"}
-                width={"fit-content"}
-                onClick={handleExitSection}
-                backgroundColor={"#125BDE"}
-              />
+              <ExitButton onClick={handleExitSection}>sair</ExitButton>
             )}
           </Menus>
           <HeadingOne text={"senhas seguras na internet"} />

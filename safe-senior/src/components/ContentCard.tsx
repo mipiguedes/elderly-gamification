@@ -25,7 +25,7 @@ const ContentHeader = styled("div", {
 });
 
 const ContentBody = styled("div", {
-  fontSize: "1rem",
+  fontSize: "1em",
   color: "#13274A",
   p: {
     lineHeight: 1.50,
@@ -33,8 +33,8 @@ const ContentBody = styled("div", {
 });
 
 const CartoonImage = styled("img", {
-  maxWidth: "70px",
-  maxHeight: "70px",
+  maxWidth: "4.375em",
+  maxHeight: "4.375em",
   border: "3px solid #939393",
   borderRadius: "50%",
   boxSizing: "border-box",
@@ -44,7 +44,7 @@ const CartoonImage = styled("img", {
 });
 
 const Title = styled("h2", {
-  fontSize: "0.9rem",
+  fontSize: "0.9em",
   fontWeight: 500,
   color: "#13274A",
   margin: 0,
