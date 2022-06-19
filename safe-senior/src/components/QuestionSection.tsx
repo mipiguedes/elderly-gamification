@@ -36,7 +36,7 @@ const Option = styled("button", {
   },
   variants: {
     type: {
-      active: {
+      button: {
         backgroundColor: "#ECECEC",
         border: "3px solid #13274A",
       },
@@ -58,7 +58,7 @@ export function QuestionSection({
       <GroupOptionCard role="radio">
         {anwserOptions.map((anwser: any, index: any) => (
           <Option
-            type={selectedOption === index ? "active" : ""}
+            type={selectedOption === index ? "button" : undefined}
             onClick={() => handleSelectedOption(index)}
             role="radio"
             aria-checked={selectedOption === index ? "true" : "false"}

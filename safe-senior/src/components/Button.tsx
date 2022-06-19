@@ -4,7 +4,7 @@ type ButtonProps = {
   text?: string;
   width?: string;
   backgroundColor?: string;
-  onClick: Function;
+  onClick: any;
 };
 
 export function Button({ text, backgroundColor, width, onClick }: ButtonProps) {

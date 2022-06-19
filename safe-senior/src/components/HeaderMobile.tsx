@@ -6,8 +6,8 @@ import { Button } from "./Button";
 
 type HeaderMobileProps = {
   title: string;
-  step?: number;
-  totalSteps?: number;
+  step?: any;
+  totalSteps?: any;
   isExitSectionActive?: boolean;
   onClickButtonExit?: Function;
   isProgressBarSection?: boolean;

@@ -7,7 +7,7 @@ export const RoutesSection = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element={<WelcomeSection />} />
+        <Route path="/" element={<WelcomeSection />} />
         <Route path="/jogar" element={<MainPage />} />
         <Route path="/medalhas" element={<MedalsSection />} />
       </Routes>

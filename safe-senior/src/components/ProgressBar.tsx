@@ -37,7 +37,7 @@ export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
       <FillerStyles
         aria-live="polite"
         role="progressbar"
-        aria-valuenow={`${completedSteps}`}
+        aria-valuenow={`${completedSteps.toString}`}
         aria-valuemin="0"
         aria-valuemax="100"
       >
