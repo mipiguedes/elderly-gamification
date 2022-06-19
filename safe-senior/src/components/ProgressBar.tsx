@@ -32,12 +32,15 @@ export const ProgressBar = ({ step, totalSteps }: ProgressBarProps) => {
     fontWeight: "bold",
   });
 
+  const ariaValueNow = completedSteps ? Number(completedSteps) : undefined;
+
   return (
     <ContainerStyles>
+      {/*@ts-ignore*/}
       <FillerStyles
         aria-live="polite"
         role="progressbar"
-        aria-valuenow={`${completedSteps.toString}`}
+        aria-valuenow={ariaValueNow}
         aria-valuemin="0"
         aria-valuemax="100"
       >

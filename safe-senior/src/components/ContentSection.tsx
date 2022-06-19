@@ -6,9 +6,9 @@ type ContentCardProps = {
   content: string;
   imageUrl: string;
   imageAlt: string;
-  buttonPreviousOnClick: Function;
+  buttonPreviousOnClick: any;
   imageButtonPrevious: string;
-  buttonNextOnClick: Function;
+  buttonNextOnClick: any;
   imageButtonNext: string;
 };
 
