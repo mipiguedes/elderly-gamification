@@ -24,8 +24,6 @@ export function AchievementSection({
     backgroundColor: "#FFFFFF",
     borderRadius: "10px",
     height: "fit-content",
-    overflowY: "auto",
-    maxHeight: "55vh",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -37,6 +35,11 @@ export function AchievementSection({
     },
   });
 
+  const AchievementContentContainer = styled("div", {
+    overflowY: "auto",
+    maxHeight: "calc(100% - 100px)",
+  });
+
   const MedalContainer = styled("div", {
     margin: "1.5em",
     padding: "0.65em",
@@ -44,8 +47,7 @@ export function AchievementSection({
     border: "3px solid #56A486",
     borderRadius: "10px",
     height: "fit-content",
-    overflowY: "auto",
-    maxHeight: "55vh",
+
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -83,7 +85,7 @@ export function AchievementSection({
     textAlign: "center",
   });
   return (
-    <>
+    <AchievementContentContainer>
       <Container>
         <Header>
           <CartoonImage src={image} alt={imageAlt} />
@@ -97,6 +99,6 @@ export function AchievementSection({
           alt="medalha aspirante em segurança de senhas na internet"
         />
       </MedalContainer>
-    </>
+    </AchievementContentContainer>
   );
 }

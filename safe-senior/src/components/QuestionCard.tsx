@@ -7,7 +7,7 @@ type QuestionCardProps = {
 };
 
 const QuestionTextCard = styled("div", {
-  margin: "1.5em",
+  margin: " 0.5em 1.5em",
   padding: "0.65em",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",

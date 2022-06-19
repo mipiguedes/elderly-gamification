@@ -15,9 +15,9 @@ type HeaderMobileProps = {
 
 const HeaderMobileStyle = styled("header", {
   backgroundColor: "#13274A",
-  padding: "0.5rem 2rem",
+  padding: "0.5rem",
   height: "fit-content",
-  minHeight: "100px",
+  minHeight: "70px",
   borderRadius: "0 0 40px 40px",
   display: "flex",
   flexDirection: "column",

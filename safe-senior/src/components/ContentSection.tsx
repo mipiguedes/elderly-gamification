@@ -23,7 +23,7 @@ const NavigationButtonStyle = styled("div", {
     backgroundColor: "#FFFFFF",
     border: 0,
     borderRadius: 10,
-    margin: "1em",
+    margin: "1em 1.5em",
     padding: "0.5em",
     cursor: "pointer",
     width: "fit-content",

@@ -30,7 +30,6 @@ const WelcomeContent = styled("div", {
   justifyContent: "center",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
-  padding: "1em",
   margin: "1.5em",
 });
 

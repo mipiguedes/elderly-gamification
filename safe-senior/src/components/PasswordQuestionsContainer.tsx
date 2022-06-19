@@ -20,7 +20,7 @@ type PasswordQuestionsContainerProps = {
 
 const PasswordQuestionsContainerStyle = styled("div", {
   overflowY: "auto",
-  maxHeight: "calc(100% - 200px)",
+  maxHeight: "calc(100% - 100px)",
   length: 0
 });
 
@@ -50,6 +50,8 @@ export function PasswordQuestionsContainer({
     localStorage.setItem("progressBarValue", "0");
     localStorage.setItem("currentQuestion", "0");
   }
+
+  console.log("currentFeedback", currentFeedback);
 
   return (
     <PasswordQuestionsContainerStyle>

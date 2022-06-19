@@ -145,14 +145,12 @@ export function MainPage() {
   const handleQuestion = () => {
     setCurrentQuestionSection("question");
 
-    if (isOptionCorrect()) {
+    if (questionResult) {
       const nextFeedback = currentFeedback + 1;
-      console.log("nextFeedback", nextFeedback);
+      
       if (nextFeedback < passwordQuestionsData.length) {
         setCurrentFeedback(nextFeedback);
       }
-
-      SumProgressBarValue();
     }
   };
 
@@ -202,22 +200,22 @@ export function MainPage() {
     SubProgressBarValue();
   };
 
-  const handlePreviousSection = () => {
-    if (currentQuestionSection === "question") {
-      setCurrentQuestionSection("feedback");
-      const previousFeedback = currentFeedback - 1;
-      setCurrentFeedback(previousFeedback);
-    }
+  // const handlePreviousSection = () => {
+  //   if (currentQuestionSection === "question") {
+  //     setCurrentQuestionSection("feedback");
+  //     const previousFeedback = currentFeedback - 1;
+  //     setCurrentFeedback(previousFeedback);
+  //   }
 
-    if (currentQuestionSection === "feedback") {
-      setCurrentQuestionSection("question");
-      const previousQuestion = currentQuestion - 1;
-      setCurrentQuestion(previousQuestion);
-      handleSetItemOnCache("currentQuestion", String(previousQuestion));
-    }
+  //   if (currentQuestionSection === "feedback") {
+  //     setCurrentQuestionSection("question");
+  //     const previousQuestion = currentQuestion - 1;
+  //     setCurrentQuestion(previousQuestion);
+  //     handleSetItemOnCache("currentQuestion", String(previousQuestion));
+  //   }
 
-    SubProgressBarValue();
-  };
+  //   SubProgressBarValue();
+  // };
 
   const handleIntermediaryButton = () => {
     handleSetItemOnCache("currentSection", "question");
