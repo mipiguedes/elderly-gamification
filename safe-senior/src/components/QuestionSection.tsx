@@ -16,12 +16,12 @@ const GroupOptionCard = styled("div", {
 });
 
 const Option = styled("button", {
-  fontSize: "1.125rem",
+  fontSize: "1.125em",
   fontWeight: 500,
   color: "#13274A",
   lineHeight: 1.3,
-  margin: "0.5rem 1.5rem",
-  padding: "0.65rem",
+  margin: "0.5em 1.5em",
+  padding: "0.45em",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
   minHeight: "53px",

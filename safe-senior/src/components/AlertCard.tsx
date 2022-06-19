@@ -8,8 +8,8 @@ type AlertCardProps = {
 };
 
 const ContentCardStyle = styled("div", {
-  margin: "1.5rem",
-  padding: "0.65rem",
+  margin: "1.5em",
+  padding: "0.65em",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
   height: "fit-content",
@@ -22,8 +22,8 @@ const ContentCardStyle = styled("div", {
 });
 
 const CartoonImage = styled("img", {
-  maxWidth: "100px",
-  maxHeight: "100px",
+  maxWidth: "6.25em",
+  maxHeight: "6.25em",
   border: "3px solid #939393",
   borderRadius: "50%",
   boxSizing: "border-box",
@@ -32,10 +32,10 @@ const CartoonImage = styled("img", {
 });
 
 const Title = styled("h2", {
-  fontSize: "1rem",
+  fontSize: "1em",
   fontWeight: 500,
   color: "#13274A",
-  margin: "1rem",
+  margin: "1em",
   lineHeight: 1.3,
   textAlign: "center"
 });

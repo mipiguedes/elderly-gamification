@@ -21,17 +21,18 @@ const NavigationButtonStyle = styled("div", {
   
   const Button = styled("button", {
     backgroundColor: "#FFFFFF",
-    width: "105px",
-    height: "58px",
     border: 0,
     borderRadius: 10,
-    padding: "5px",
-    cursor: "pointer"
+    margin: "1em",
+    padding: "0.5em",
+    cursor: "pointer",
+    width: "fit-content",
+    height: "fit-content"
   });
   
   const Image = styled("img", {
-    width: "100%",
-    height: "100%",
+    width: "30%",
+    height: "30%",
     objectFit: "contain",
   });
 

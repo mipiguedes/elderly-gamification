@@ -45,7 +45,7 @@ const ExitButton = styled("button", {
   fontSize: "1em",
   fontWeight: 800,
   color: "#D8EFFF",
-  length: 0
+  length: 0,
 });
 
 const Menus = styled("div", {
@@ -57,7 +57,7 @@ const Menus = styled("div", {
 });
 
 const ButtonContainer = styled("div", {
-  margin: "1.5rem",
+  margin: "1.5em",
   display: "flex",
   justifyContent: "space-between",
 });
@@ -70,8 +70,6 @@ export function MainPage() {
   const [intermediarySection, setIntermediarySection] = useState(false);
 
   const [exitSection, setExitSection] = useState(false);
-
-  const [initialSection, setInitialSection] = useState(false);
 
   const [currentQuestionSection, setCurrentQuestionSection] =
     useState("question");
@@ -230,10 +228,11 @@ export function MainPage() {
   };
 
   const handleExitSection = () => {
-    setIntermediarySection(false);
-    setQuestionSection(false);
-    setContentSection(false);
-    setExitSection(true);
+    handleSetItemOnCache("currentContent", "0");
+    handleSetItemOnCache("progressBarValue", "0");
+    handleSetItemOnCache("currentSection", "content");
+    handleSetItemOnCache("currentQuestion", "0");
+    window.location.href = "/";
   };
 
   const handleReturnButton = () => {
@@ -241,6 +240,7 @@ export function MainPage() {
 
     if (storagedCurrentSection === "content") {
       handleSetItemOnCache("currentSection", "content");
+      console.log('aqui');
       setExitSection(false);
       setContentSection(true);
     }
@@ -253,19 +253,16 @@ export function MainPage() {
   };
 
   const handleExitButton = () => {
-    handleSetItemOnCache("currentSection", "initial");
     setExitSection(false);
     setContentSection(false);
     setQuestionSection(false);
-    setInitialSection(true);
+    setExitSection(true);
   };
 
   const SumProgressBarValue = () => {
     const newValue = progressBarValue + 1;
     setProgressBarValue(newValue);
     handleSetItemOnCache("progressBarValue", String(newValue));
-    
-    
   };
 
   const SubProgressBarValue = () => {
@@ -297,13 +294,13 @@ export function MainPage() {
         <HeaderMobileStyle>
           <Menus>
             <div>
-              {isReturnButtonOnQuestionSectionActive && (
+              {/* {isReturnButtonOnQuestionSectionActive && (
                 <ReturnButton onClick={handlePreviousSection} />
-              )}
+              )} */}
             </div>
 
             {exitSection === false && (
-              <ExitButton onClick={handleExitSection}>sair</ExitButton>
+              <ExitButton onClick={handleExitButton}>sair</ExitButton>
             )}
           </Menus>
           <HeadingOne text={"senhas seguras na internet"} />
@@ -314,12 +311,6 @@ export function MainPage() {
             ></ProgressBar>
           )}
         </HeaderMobileStyle>
-
-        {initialSection && (
-          <>
-            <p>Initial page</p>
-          </>
-        )}
 
         {isContentSectionActive && (
           <>
@@ -393,7 +384,7 @@ export function MainPage() {
                 text={"Sair"}
                 backgroundColor={"#E64E3D"}
                 width={"49%"}
-                onClick={handleExitButton}
+                onClick={handleExitSection}
               />
             </ButtonContainer>
           </>

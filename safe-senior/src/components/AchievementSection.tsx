@@ -19,8 +19,8 @@ export function AchievementSection({
   backgroundColor,
 }: AchievementSectionProps) {
   const Container = styled("div", {
-    margin: "1.5rem",
-    padding: "0.65rem",
+    margin: "1.5em",
+    padding: "0.65em",
     backgroundColor: "#FFFFFF",
     borderRadius: "10px",
     height: "fit-content",
@@ -33,13 +33,13 @@ export function AchievementSection({
 
   const TextArea = styled("div", {
     p: {
-      margin: "0.45rem 0",
+      margin: "0.45em 0",
     },
   });
 
   const MedalContainer = styled("div", {
-    margin: "1.5rem",
-    padding: "0.65rem",
+    margin: "1.5em",
+    padding: "0.65em",
     backgroundColor: "#E0FFCC",
     border: "3px solid #56A486",
     borderRadius: "10px",
@@ -55,13 +55,12 @@ export function AchievementSection({
 
   const Header = styled("div", {
     display: "flex",
-    justifyContent: "space-between",
     alignItems: "center",
   });
 
   const CartoonImage = styled("img", {
-    maxWidth: "100px",
-    maxHeight: "100px",
+    maxWidth: "6.25em",
+    maxHeight: "6.25em",
     border: "3px solid #939393",
     borderRadius: "50%",
     boxSizing: "border-box",
@@ -70,16 +69,16 @@ export function AchievementSection({
   });
 
   const ImageMedal = styled("img", {
-    maxWidth: "200px",
-    maxHeight: "200px",
+    maxWidth: "12.5em",
+    maxHeight: "12.5em",
     objectFit: "cover",
   });
 
   const Title = styled("h2", {
-    fontSize: "1rem",
+    fontSize: "1em",
     fontWeight: 500,
     color: "#13274A",
-    margin: "1rem",
+    margin: "1em",
     lineHeight: 1.3,
     textAlign: "center",
   });

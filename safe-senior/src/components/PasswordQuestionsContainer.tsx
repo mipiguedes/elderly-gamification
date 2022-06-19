@@ -25,7 +25,7 @@ const PasswordQuestionsContainerStyle = styled("div", {
 });
 
 const ButtonContainer = styled("div", {
-  margin: "1.5rem",
+  margin: "1.5em",
   display: "flex",
   justifyContent: "center",
 });

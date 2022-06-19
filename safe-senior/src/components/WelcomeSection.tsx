@@ -10,7 +10,6 @@ const WelcomeSectionStyle = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   length: 0,
-  
 });
 
 const WelcomeHeader = styled("div", {
@@ -25,10 +24,14 @@ const WelcomeHeader = styled("div", {
 });
 
 const WelcomeContent = styled("div", {
-  padding: "1rem 3rem",
+  padding: "1em 3em",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center"
+  justifyContent: "center",
+  backgroundColor: "#FFFFFF",
+  borderRadius: "10px",
+  padding: "1em",
+  margin: "1.5em",
 });
 
 const CartoonImage = styled("img", {
@@ -40,30 +43,34 @@ const CartoonImage = styled("img", {
 });
 
 const Title = styled("h2", {
-  fontSize: "1.15rem",
+  fontSize: "1.15em",
   fontWeight: 700,
   color: "#13274A",
-  margin: "1rem 0",
+  margin: "1em 0",
   lineHeight: 1.3,
   textAlign: "left",
 });
 
 const Paragraph = styled("p", {
-  fontSize: "1.05rem",
+  fontSize: "1.05em",
   fontWeight: 500,
   color: "#13274A",
-  margin: "0.5rem 0",
+  margin: "0.5em 0",
   lineHeight: 1.3,
   textAlign: "left",
 });
 
 const ParagraphSmall = styled("p", {
-  fontSize: "1.05rem",
+  fontSize: "1.05em",
   fontWeight: 500,
   color: "#13274A",
   lineHeight: 1.3,
   textAlign: "left",
-  margin: "0.5rem 0 1rem 0",
+  margin: "0.5em 0 1em 0",
+});
+
+const ContainerButton = styled("div", {
+  margin: "1.5em",
 });
 
 const handleSetItemOnCache = (key: string, value: string) => {
@@ -71,16 +78,16 @@ const handleSetItemOnCache = (key: string, value: string) => {
 };
 
 const ResetContentValue = () => {
-  handleSetItemOnCache('currentContent', '0');
-  handleSetItemOnCache('progressBarValue', '0');
-  handleSetItemOnCache('currentSection', 'content');
-  handleSetItemOnCache('currentQuestion', '0');
+  handleSetItemOnCache("currentContent", "0");
+  handleSetItemOnCache("progressBarValue", "0");
+  handleSetItemOnCache("currentSection", "content");
+  handleSetItemOnCache("currentQuestion", "0");
 };
 
 const handleContinueButton = () => {
   ResetContentValue();
   window.location.href = "/jogar";
-}
+};
 
 export const WelcomeSection = () => {
   return (
@@ -102,13 +109,15 @@ export const WelcomeSection = () => {
           </ParagraphSmall>
 
           <ParagraphSmall>Vamos começar então?</ParagraphSmall>
+        </WelcomeContent>
+        <ContainerButton>
           <Button
             text="Começar"
             backgroundColor="linear-gradient(271.96deg, #125BDE -6.04%, #1255CE -6.02%, #13274A 110.71%)"
             width="100%"
             onClick={handleContinueButton}
-          ></Button>
-        </WelcomeContent>
+          />
+        </ContainerButton>
       </ContainerMobile>
     </WelcomeSectionStyle>
   );

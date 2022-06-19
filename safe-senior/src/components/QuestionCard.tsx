@@ -7,8 +7,8 @@ type QuestionCardProps = {
 };
 
 const QuestionTextCard = styled("div", {
-  margin: "1.5rem",
-  padding: "0.65rem",
+  margin: "1.5em",
+  padding: "0.65em",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
   height: "fit-content",
@@ -19,18 +19,18 @@ const QuestionTextCard = styled("div", {
 });
 
 const CartoonImage = styled("img", {
-  maxWidth: "70px",
-  maxHeight: "70px",
+  maxWidth: "4.375em",
+  maxHeight: "4.375em",
   border: "3px solid #939393",
   borderRadius: "50%",
   boxSizing: "border-box",
   objectFit: "cover",
   objectPosition: 100 % 0,
-  marginRight: "1rem",
+  marginRight: "1em",
 });
 
 const Title = styled("h2", {
-  fontSize: "1rem",
+  fontSize: "1em",
   fontWeight: 500,
   color: "#13274A",
   margin: 0,

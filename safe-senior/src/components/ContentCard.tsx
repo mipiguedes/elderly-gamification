@@ -9,8 +9,8 @@ type ContentCardProps = {
 };
 
 const ContentCardStyle = styled("div", {
-  margin: "1.5rem",
-  padding: "0.65rem",
+  margin: "1.5em",
+  padding: "1em",
   backgroundColor: "#FFFFFF",
   borderRadius: "10px",
   height: "fit-content",
@@ -21,7 +21,7 @@ const ContentCardStyle = styled("div", {
 const ContentHeader = styled("div", {
   display: "flex",
   alignItems: "center",
-  marginBottom: "1rem",
+  marginBottom: "1em",
 });
 
 const ContentBody = styled("div", {
@@ -40,7 +40,7 @@ const CartoonImage = styled("img", {
   boxSizing: "border-box",
   objectFit: "cover",
   objectPosition: 100 % 0,
-  marginRight: "0.75rem",
+  marginRight: "0.75em",
 });
 
 const Title = styled("h2", {
