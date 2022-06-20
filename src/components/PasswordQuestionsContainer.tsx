@@ -44,7 +44,7 @@ export function PasswordQuestionsContainer({
 }: PasswordQuestionsContainerProps) {
 
   const sendToMedalsPage = () => {
-    window.location.href = "/medalhas";
+    window.location.href = "/elderly-gamification/medalhas";
     localStorage.setItem("currentSection", "content");
     localStorage.setItem("currentContent", "0");
     localStorage.setItem("progressBarValue", "0");
@@ -59,7 +59,7 @@ export function PasswordQuestionsContainer({
         <>
           <QuestionSection
             question={passwordQuestionsData[currentQuestion].question}
-            image={`../src/img/${passwordQuestionsData[currentQuestion].image}`}
+            image={`${passwordQuestionsData[currentQuestion].image}`}
             imageAlt={passwordQuestionsData[currentQuestion].imageAlt}
             handleSelectedOption={handleSelectedOption}
             anwserOptions={anwserOptions}
@@ -70,7 +70,7 @@ export function PasswordQuestionsContainer({
 
       {currentSection === "feedback" && (
         <AlertCard
-          image={`../src/img/${
+          image={`${
             questionResult === true
               ? passwordQuestionsData[currentFeedback].feedbacks
                   ?.imageFeedbackRight

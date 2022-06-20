@@ -85,7 +85,7 @@ const ResetContentValue = () => {
 
 const handleContinueButton = () => {
   ResetContentValue();
-  window.location.href = "/jogar";
+  window.location.href = "/elderly-gamification/jogar";
 };
 
 export const WelcomeSection = () => {
@@ -94,7 +94,7 @@ export const WelcomeSection = () => {
       <ContainerMobile>
         <WelcomeHeader>
           <CartoonImage
-            src={`../src/img/acenando.png`}
+            src={`acenando.png`}
             alt={"imagem idosa acenando"}
           />
         </WelcomeHeader>

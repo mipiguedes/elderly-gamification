@@ -7,9 +7,9 @@ export const RoutesSection = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomeSection />} />
-        <Route path="/jogar" element={<MainPage />} />
-        <Route path="/medalhas" element={<MedalsSection />} />
+        <Route path="/elderly-gamification/" element={<WelcomeSection />} />
+        <Route path="/elderly-gamification/jogar" element={<MainPage />} />
+        <Route path="/elderly-gamification/medalhas" element={<MedalsSection />} />
       </Routes>
     </BrowserRouter>
   );

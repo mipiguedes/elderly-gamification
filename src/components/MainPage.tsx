@@ -315,7 +315,7 @@ export function MainPage() {
             <ContentSection
               title={passwordContent[currentContent].title}
               content={passwordContent[currentContent].text}
-              imageUrl={`../src/img/${passwordContent[currentContent].image}`}
+              imageUrl={`${passwordContent[currentContent].image}`}
               imageAlt={passwordContent[currentContent].imageAlt}
               buttonPreviousOnClick={handleButtonPrevious}
               buttonNextOnClick={handleButtonNext}
@@ -328,7 +328,7 @@ export function MainPage() {
         {isIntermediarySection && (
           <>
             <AlertCard
-              image={`../src/img/dedos-cruzados.png`}
+              image={`dedos-cruzados.png`}
               imageAlt={"idosa com dedos cruzados sorrindo"}
               text={
                 "<p><b>Você topa colocar esse conteúdo em prática?</b></p><p>Estou torcendo por você!</p>"
@@ -366,7 +366,7 @@ export function MainPage() {
           <>
             <AlertCard
               imageAlt={"idosa com expressão de surpresa"}
-              image={`../src/img/mao-na-boca.png`}
+              image={`mao-na-boca.png`}
               text={"<p><b>Você saiu...</b></p><p>Deseja retornar ao jogo?</p>"}
             />
             <ButtonContainer>

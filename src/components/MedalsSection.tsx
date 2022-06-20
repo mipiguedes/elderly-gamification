@@ -23,9 +23,9 @@ export const MedalsSection = () => {
           text={
             "<p>Agora você sabe como manter suas senhas seguras na internet!</p><p>Acredite, tão importante quanto não compartilhar sua senha com terceiros é criar senhas bem difíceis de serem desvendadas.</p><p>Essa é sua <b>medalha</b> por sua conquista!</p>"
           }
-          image={`../src/img/festejando.png`}
+          image={`festejando.png`}
           imageAlt={"idosa festejando"}
-          imageMedal={`../src/img/emblema.png`}
+          imageMedal={`emblema.png`}
         />
       </ContainerMobile>
     </MedalSectionStyle>
